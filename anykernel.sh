@@ -5,7 +5,7 @@
 ### AnyKernel setup
 # Global properties
 properties() { cat <<'PROP'
-kernel.string=Templar Kernel by WiL (@Steambot12)
+kernel.string=Templar Kernel by WiL (@Steambot12) kang by tungtx0507
 do.devicecheck=0
 do.modules=0
 do.systemless=1
@@ -21,7 +21,7 @@ PROP
 
 ### Kernel identification
 KERNEL_NAME="Templar"
-KERNEL_AUTHOR="WiL"
+KERNEL_AUTHOR="Tùng TX"
 
 ### AnyKernel install
 ## Boot shell variables
@@ -494,17 +494,6 @@ w() { [ -f "$1" ] && echo "$2" > "$1" 2>/dev/null; }
     [ -n "$EXTRA_WL" ] && w "$BLK" "$EXTRA_WL"
 
     echo "Done"
-
-    # --- BORE: converge boot-time weight state (one-time) ---
-    # A fresh boot leaves each task's weight latched from fork-time burst
-    # state (weight updates are lazy per-task). Writing sched_bore re-runs the
-    # sysctl handler's global re-derive of all fair weights -- the same clean
-    # state a manual off/on toggle produces. Node is absent when BORE is not
-    # built, so w() no-ops. Fire after the boot fork-storm has settled.
-    (
-        sleep 60
-        w /proc/sys/kernel/sched_bore 1
-    ) >> /data/local/tmp/templar_power.log 2>&1 &
 
     # --- Wakeup-source report (diagnostic only, no tuning) ---
     # Idle/deepsleep drain and "big cores wake every few seconds" are almost
