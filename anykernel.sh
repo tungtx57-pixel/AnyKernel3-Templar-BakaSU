@@ -113,7 +113,7 @@ deep_kernel_cleanup() {
 
 ## Auto-detect and backup boot partition
 backup_boot_image() {
-    backup_dir="/sdcard/${KERNEL_NAME}Kernel_Backup"
+    backup_dir="/sdcard/${KERNEL_NAME}Kernel_Backup(ngu moi bootloop)"
     timestamp=$(date +%Y%m%d_%H%M%S)
 
     mkdir -p "$backup_dir" 2>/dev/null
@@ -322,7 +322,7 @@ set_postflash_configs() {
 
     cat > /data/adb/service.d/templar_kernel_init.sh << 'EOF'
 #!/system/bin/sh
-LOGFILE="/data/local/tmp/templar_init.log"
+LOGFILE="/data/local/tx.log"
 
 # Wait for boot complete
 while [ "$(getprop sys.boot_completed)" != "1" ]; do
@@ -562,16 +562,16 @@ ui_print "============================================"
 ui_print "  ✓ Installation Complete"
 ui_print "============================================"
 ui_print " "
-ui_print "  Backup: /sdcard/${KERNEL_NAME}Kernel_Backup"
+ui_print " "
 ui_print " "
 ui_print "  NEXT STEPS:"
 ui_print "  1. Reboot device"
 ui_print "  2. Wait 2-3 minutes for init"
-ui_print "  3. Check: /data/local/tmp/templar_init.log"
+ui_print "  3. Check: /data/local/tmp/templar_init.log (bo m xoa)"
 ui_print " "
 ui_print "  If bootloop occurs:"
 ui_print "  → Flash: ${KERNEL_NAME}-Backup_*.img"
-ui_print "     from /sdcard/${KERNEL_NAME}Kernel_Backup"
+ui_print "     from /sdcard/${KERNEL_NAME}Kernel_Backup(ngu moi bootloop)"
 ui_print " "
 ui_print "============================================"
 ui_print " "
